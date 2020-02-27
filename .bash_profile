@@ -1,0 +1,1 @@
+export PATH=$PATH:/Users/StinkBC/Documents/phpDocs/node/global/bin/
