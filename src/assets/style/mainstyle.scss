@@ -1,0 +1,864 @@
+$maincolor:rgba(245, 106, 147, 1);
+$bgcolor:rgba(250, 250, 250, 1);
+
+*{box-sizing: border-box;}
+
+html,
+body,
+#app {
+    height: 100%;
+    background-color: $bgcolor;
+    font-family: Helvetica Neue, Helvetica, Arial, Sans-serif;
+}
+
+h6 {
+    font-size: 20px;
+    color: rgba(58, 58, 58, 0.75);
+    text-align: left;
+}
+
+p {
+    font-size: 18px;
+    color: rgba(58, 58, 58, 0.75);
+    text-align: left;
+}
+
+.intro {
+    font-size: 16px;
+    color: rgba(58, 58, 58, 0.50);
+    text-align: left;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.flex_c {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex_b {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    ;
+}
+
+.flex_a {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    ;
+}
+
+.mar_b_40 {
+    margin-bottom: 40px;
+}
+
+.mar_b_20 {
+    margin-bottom: 20px;
+}
+
+.mar_b_15 {
+    margin-bottom: 15px;
+}
+
+.mar_b_10 {
+    margin-bottom: 10px;
+}
+
+.mar_b_5 {
+    margin-bottom: 5px;
+}
+
+.w_100 {
+    width: 100%;
+}
+
+body {
+    background-color: #fff;
+    overflow: hidden;
+
+    .icon {
+        width: 30px;
+        height: 30px;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+    }
+
+    .nav_prominent_btn {
+        position: fixed;
+        bottom: 0;
+        left: 40%;
+        z-index: 2001;
+        width: 20%;
+        background: rgba(245, 245, 245, 0.9);
+        backdrop-filter: blur(8px);
+        border-radius: 100%;
+        overflow: hidden;
+
+        img {
+            width: 100%
+        }
+    }
+
+    .m-view {
+        height: 100%;
+    }
+
+    .m-tabBar {
+        position: fixed;
+        bottom: 0;
+        z-index: 2000;
+        width: 100%;
+        background: rgba(245, 245, 245, 0.9);
+        backdrop-filter: blur(8px);
+        height: 60px;
+
+        font-size: 12px;
+
+        .cube-tab_active {
+            .icon {
+                color: rgba(223, 109, 143, 0.5);
+            }
+
+            p {
+                color: rgba(223, 109, 143, 0.75);
+            }
+        }
+
+
+        .icon {
+            height: 25px;
+            width: 25px;
+            color: rgba(58, 58, 58, 0.75);
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+            color: rgba(58, 58, 58, 0.75);
+        }
+    }
+
+    .m-nav {
+        z-index: 1000;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        height: 40px;
+        line-height: 38px;
+        text-align: center;
+
+        .icon {
+            width: 28px;
+            height: 28px;
+        }
+
+        &-default,
+        &-for-home,
+        &-for-content,
+        &-for-search {
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+
+        // 通用导航
+        &-default {
+            box-sizing: border-box;
+            background-color: $bgcolor;
+            // box-shadow: 0 2px 1px #e9eaea;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 4px #F56A93 solid;
+
+            .icon {
+                color: rgba(58, 58, 58, 0.5);
+            }
+
+        }
+
+        // 首页导航
+        &-for-home {
+            background-color: #EDF0F4;
+            // box-shadow: 0 2px 1px #e9eaea;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-image: linear-gradient(135deg, #F56A93 0%, rgba(223, 109, 143, 0.90) 100%);
+            border-top: 4px rgba(245, 106, 147, 0) solid;
+
+            .icon {
+                color: #fff
+            }
+
+
+            .cube-input {
+                background-color: none;
+                position: initial;
+
+                &_actived {
+                    height: 100%;
+                    border: none;
+                }
+
+                &-field {
+                    height: 100%;
+                    border: none;
+                    background-color: rgba(58, 58, 58, 0);
+
+                }
+
+                &-append {
+                    color: rgba(255, 255, 255, 0.50);
+
+                }
+
+                input {
+                    border: none;
+                    color: rgba(255, 255, 255, 0.90);
+                }
+
+            }
+        }
+
+        .search_input {
+            border-radius: 12px;
+            height: 24px;
+            width: 70%;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            ;
+            background: rgba(58, 58, 58, 0.05);
+
+            .icon {
+                width: 16px;
+                height: 16px;
+            }
+
+            &_placeholder {
+                font-size: 12px;
+                line-height: 24px;
+                height: 24px;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+
+        &-search {
+            background: rgba(58, 58, 58, 0.05);
+            border-radius: 11.25px;
+            width: 90%;
+            height: 22.5px;
+        }
+
+        // 搜索页导航
+        &-for-search {
+            box-sizing: border-box;
+            background-color: $bgcolor;
+            // box-shadow: 0 2px 1px #e9eaea;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 4px #F56A93 solid;
+
+            .icon {
+                color: rgba(58, 58, 58, 0.5);
+            }
+
+
+            .cube-input {
+                background-color: none;
+                position: initial;
+                border: 1px solid rgba(245, 106, 147, 0.50);
+
+
+                &_actived {
+                    height: 100%;
+                    border: none;
+                }
+
+                &-field {
+                    height: 100%;
+                    border: none;
+                    background-color: rgba(58, 58, 58, 0);
+
+                }
+
+                &-append {
+                    color: rgba(255, 255, 255, 0.50);
+
+                }
+
+                input {
+                    border: none;
+                    color: rgba(255, 255, 255, 0.90);
+
+                    /* WebKit browsers*/
+                    &::-webkit-input-placeholder {
+                        font-size: 12px;
+                        color: rgba(58, 58, 58, 0.25);
+                        text-align: center;
+
+                    }
+
+                    /* Mozilla Firefox 4 to 18*/
+                    &:-moz-placeholder {
+                        font-size: 12px;
+                        color: rgba(58, 58, 58, 0.5);
+                        text-align: center;
+                    }
+
+                    /* Mozilla Firefox 19+*/
+                    &::-moz-placeholder {
+                        font-size: 12px;
+                        color: rgba(58, 58, 58, 0.5);
+                        text-align: center;
+                    }
+
+                    /* Internet Explorer 10+*/
+                    &:-ms-input-placeholder {
+                        font-size: 12px;
+                        color: rgba(58, 58, 58, 0.5);
+                        text-align: center;
+                    }
+                }
+
+            }
+        }
+
+        // 导航
+        &-for-content {
+            background-color: rgba(245, 245, 245, 0);
+
+            // box-shadow: 0 2px 1px #e9eaea;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            width: 100%;
+            height: 100%;
+            border-top: 4px #F56A93 solid;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+
+            .icon {
+                color: #fff
+            }
+
+        }
+
+
+        h1 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+    }
+
+    .m-content {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+
+        h2 {
+            font-size: 18px;
+            color: rgba(58, 58, 58, 0.50);
+            line-height: 28px;
+            margin-bottom: 5px;
+            text-align: left;
+            margin-left: 5px;
+
+
+            &:before {
+                content: url(http://image-ais.100bt.com/201/lJE.png);
+                margin-right: 5px;
+            }
+        }
+
+
+        .m-list {
+            padding-left: 10px;
+        
+
+            .m-index-list-group {
+                .m-index-list-anchor {
+                    font-size: 16px;
+                }
+
+                ul {
+                    .m-item {
+                        height: 40px;
+                        line-height: 40px;
+                        padding-left: 16px;
+
+                        .link {
+                            display: block;
+                            position: relative;
+                            width: 100%;
+                            color: #333;
+                            text-decoration: none;
+                            outline: 0;
+
+                            .m-ic-arrow {
+                                position: absolute;
+                                right: 0;
+                                padding: 0 5px;
+                                color: #ccc;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .m-index-list-nav {
+                margin-right: 0px;
+                padding: 8px 5px;
+                border-radius: 3px 0 0 3px;
+                background: #f7f7f7;
+                box-shadow: 0 0 5px #80808047;
+
+                >ul {
+                    >li {
+                        padding: 8px 0;
+                    }
+                }
+            }
+
+            .m-index-list-fixed {
+                font-size: 16px;
+            }
+        }
+
+        .cube-slide {
+            overflow: hidden;
+            height: 115px;
+
+            &-group {
+                height: 110px;
+            }
+
+            &-dots {
+                bottom: 0px;
+
+                span {
+                    width: 10px;
+                }
+
+                .active {
+                    background: $maincolor;
+                    width: 15px;
+                }
+            }
+        }
+
+
+        .m-home-banner {
+            height: 115px;
+            margin: 5px;
+
+            img {
+                width: 100%;
+            }
+
+            a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+
+        .m-home-lipsticks {
+            box-sizing: border-box;
+            width: 100%;
+            height: 126px;
+            padding: 0 5px;
+
+            h2 {
+
+                margin-left: 0px;
+
+            }
+
+            .cube-scroll-content {
+                display: inline-block;
+            }
+
+            .lipstick_list {
+                height: 90px;
+                white-space: nowrap;
+                display: inline-block;
+
+                .flex_c {
+                    height: 80px;
+                }
+
+                .lipsstick_card {
+                    display: inline-block;
+                }
+            }
+        }
+
+
+    }
+
+    .lipstick_list_sku {
+        box-sizing: border-box;
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 5px 5px;
+
+        .lipsstick_sku {
+            box-sizing: border-box;
+            width: 48%;
+            margin-bottom: 15px;
+            background: $bgcolor;
+            box-shadow: 1px 1px 2px 1px rgba(58, 58, 58, 0.1);
+            text-align: center;
+
+            .lipstick_info {
+                box-sizing: border-box;
+                width: 100%;
+                padding: 2px 5px;
+
+
+                h6 {
+                    font-size: 16px;
+                    color: rgba(58, 58, 58, 0.75);
+                    line-height: 20px;
+                    text-align: center;
+                }
+
+                p {
+                    font-size: 10px;
+                    line-height: 14px;
+                    color: rgba(58, 58, 58, 0.50);
+                    text-align: center;
+                }
+
+
+            }
+
+            .lipstick_img {
+                width: 100%;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+        }
+    }
+
+    .lipstick_list_item {
+        padding: 0 5px;
+
+        .lipsstick_item {
+            box-sizing: border-box;
+            padding: 0 5px;
+            width: 100%;
+            height: 80px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            background: $bgcolor;
+            box-shadow: 2px 2px 4px 1px rgba(58, 58, 58, 0.25);
+
+            .lipstick_info {
+                width: 180px;
+                margin-left: 10px;
+                text-align: left;
+
+                h6 {
+                    font-size: 20px;
+                    color: rgba(58, 58, 58, 0.75);
+                    line-height: 27px;
+                }
+
+                p {
+                    font-size: 12px;
+                    line-height: 14px;
+                    color: rgba(58, 58, 58, 0.50);
+                }
+
+                .lipstick_color {
+                    height: 15px;
+                    line-height: 15px;
+                    font-size: 12px;
+                    color: rgba(58, 58, 58, 0.50);
+
+                    li {
+                        display: inline-block;
+                    }
+
+                    span {
+                        display: inline-block;
+                        width: 15px;
+                        height: 15px;
+                        margin-right: 5px;
+                    }
+                }
+            }
+
+            .lipstick_img {
+                width: 50px;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+
+        }
+    }
+
+    .lipsstick_card {
+        width: 240px;
+        height: 80px;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        background: $bgcolor;
+        box-shadow: 2px 2px 4px 1px rgba(58, 58, 58, 0.25);
+
+        .lipstick_info {
+            width: 180px;
+            margin-left: 10px;
+            text-align: left;
+
+            h6 {
+                font-size: 20px;
+                color: rgba(58, 58, 58, 0.75);
+                line-height: 27px;
+            }
+
+            p {
+                font-size: 12px;
+                line-height: 14px;
+                color: rgba(58, 58, 58, 0.50);
+            }
+
+            .lipstick_color {
+                height: 15px;
+                line-height: 15px;
+                font-size: 12px;
+                color: rgba(58, 58, 58, 0.50);
+
+                li {
+                    display: inline-block;
+                }
+
+                span {
+                    display: inline-block;
+                    width: 15px;
+                    height: 15px;
+                    margin-right: 5px;
+                }
+            }
+        }
+
+        .lipstick_img {
+            width: 50px;
+
+            img {
+                width: 100%;
+            }
+        }
+
+
+    }
+
+  
+
+    // 搜索页公用样式
+    #lipstick_search {
+        // z-index: 900;
+        background-color: $bgcolor;
+        box-sizing: border-box;
+        height:calc(100vh - 40px);
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+
+
+        .cube-scroll-wrapper {
+            height: 100%;
+        }
+
+        .lipstick_search-result {
+            width: 100%;
+            height: calc(100vh - 35px);
+            position: absolute;
+            top: 35px;
+            left: 0;
+            box-sizing: border-box;
+            
+        }
+
+
+        .top-panel {
+            height: 35px;
+            font-size: 10px;
+            width: 100%;
+
+            .left-panel {
+                margin-bottom: 0px;
+
+                span {
+                    display: block;
+                    font-size: 10px;
+                    line-height: 20px;
+                    color: #666;
+                    text-align: center;
+                    padding: 6px 0px 5px 0px;
+                }
+            }
+
+            .right-panel {
+                margin-bottom: 0px;
+                width: 100%;
+                border-bottom: 1px solid rgba(58, 58, 58, 0.25);
+
+                .cube-select {
+                    display: inline-block;
+                    width: 33%;
+                    height: 35px;
+                    overflow: hidden;
+                    padding: 6px 8px 5px 0px;
+
+                    span {
+                        font-size: 10px;
+                    }
+
+                    &::after {
+                        border: none;
+                    }
+
+                }
+            }
+
+        }
+
+        .left-panel {
+            box-sizing: border-box;
+            display: inline-block;
+            width: 18%;
+            min-width: 60px;
+            height: 100%;
+
+            .cube-tab-bar {
+                flex-wrap: wrap;
+
+                .cube-tab {
+                    width: 100%;
+                    box-sizing: border-box;
+                    min-width: 60px;
+                    padding: 0 4px;
+                    font-size: 10px;
+                    transition: all 0.3s ease-in;
+
+                    .icon {
+                        width: 20px;
+                        height: 20px;
+                        position: absolute;
+                        right: -5px;
+                    }
+
+                    .brandName {
+                        width: 100%;
+                        height: 50px;
+                        margin: 2px 0;
+                        display: flex;
+                        justify-content: center;
+                        flex-wrap: wrap;
+                        overflow-y: hidden;
+                        line-height: 14px;
+                        font-size: 10px;
+                        text-align: center;
+                        align-items: center;
+                        border-bottom: 1px solid rgba(58, 58, 58, 0.1);
+
+
+                        p {
+                            font-size: 10px;
+                            display: block;
+                            width: 100%;
+                            min-width: 50px;
+                            text-align: center;
+                        }
+                    }
+
+                    .icon {
+                        height: 30px;
+                        display: inline-block;
+                    }
+
+                    span {
+                        width: 30px;
+                        height: 30px;
+                        margin-bottom: 10px;
+                        margin-right: 2px;
+                        display: inline-block;
+
+                    }
+
+                    
+                }
+                .cube-tab_active {
+                    color: $maincolor;
+                    font-size: 12px;
+
+                    p{
+                        color:$maincolor !important;
+                    }
+
+                }
+            }
+
+        }
+
+        .right-panel {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+
+        }
+    }
+
+    .empty_bottom {
+        height: 80px;
+        width: 100%;
+    }
+
+}
