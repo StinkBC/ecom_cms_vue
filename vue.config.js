@@ -13,20 +13,41 @@ function resolve (dir) {
 }
 
 module.exports = {
-  baseUrl: isDev ? 'http://127.0.0.1:8082' : 'http://127.0.0.1:3000',
+  // baseUrl: isDev ? 'http://127.0.0.1:8082' : 'http://127.0.0.1:3000',
+  // Vue CLI 会假设你的应用是被部署在一个域名的根路径上，例如 https://www.my-app.com/。
+  // 如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。
+  // 例如，如果你的应用被部署在 https://www.my-app.com/my-app/，则设置 publicPath 为 /my-app/。
+  publicPath:isDev ? '/':'/',
 
   devServer: {
+    port:8888,
     historyApiFallback: true,
-    headers: { 'Access-Control-Allow-Origin': '*' }
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    proxy: {
+      '/api': {
+        target: 'https://localhost:8888',
+        changeOrigin: true,
+        pathRewrite: {
+          // '^/w': '/w'
+        }
+      }
+    }
+
   },
   css: {
     extract: false,
     loaderOptions: {
-
-      stylus: {
-        'resolve url': true,
-        'import': [
-          './src/theme'
+      postcss: {
+        plugins: [
+          require('autoprefixer')({}),
+          require('postcss-plugin-px2rem')({
+            rootValue: 75,
+            unitPrecision: 5,
+            // exclude: /(node_module)/i,
+            mediaQuery: false,
+            minPixelValue: 3,
+            propBlackList: ['border']
+          })
         ]
       }
     }
@@ -62,13 +83,16 @@ module.exports = {
 
   chainWebpack: config => {
     config.resolve.alias
-    // key,value自行定义，比如.set('@assets', resolve('src/assets'))
+      // key,value自行定义，比如.set('@assets', resolve('src/assets'))
       .set('@', resolve('src'))
       .set('@router', resolve('src/router'))
+      .set('@api', resolve('src/model/api'))
       .set('@views', resolve('src/views'))
       .set('@assets', resolve('src/assets'))
       .set('@store', resolve('src/store'))
+      .set('@common', resolve('src/components/common'))
       .set('@mockdatas', resolve('mockdatas'))
+
     config.module
       .rule('vue')
       .use('vue-loader')
@@ -84,10 +108,5 @@ module.exports = {
     }
   },
 
-  pluginOptions: {
-    'cube-ui': {
-      postCompile: true,
-      theme: true
-    }
-  }
+  pluginOptions: {}
 }

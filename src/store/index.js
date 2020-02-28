@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import nav from './modules/nav'
+import nav from './modules/Administrator'
 
 Vue.use(Vuex)
 

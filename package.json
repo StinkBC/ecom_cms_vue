@@ -17,6 +17,8 @@
   "dependencies": {
     "amfe-flexible": "^2.2.1",
     "axios": "^0.18.0",
+    "element-ui": "^2.13.0",
+    "element-theme-chalk": "^2.13.0",
     "fastclick": "^1.0.6",
     "koa": "^2.5.3",
     "koa-mount": "^4.0.0",
@@ -39,37 +41,15 @@
     "lodash.merge": "^4.6.1",
     "memory-fs": "^0.4.1",
     "node-sass": "^4.13.0",
+    "portfinder": "^1.0.21",
     "postcss-px2rem": "^0.3.0",
     "sass-loader": "^7.3.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "vue-cli-plugin-cube-ui": "^0.2.5",
     "vue-server-renderer": "2.5.17",
     "vue-template-compiler": "2.5.17",
     "webpack": "^4.20.2",
     "webpack-node-externals": "^1.7.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/standard"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {},
-      "postcss-px2rem": {
-        "remUnit": 37.5
-      }
-    }
   },
   "browserslist": [
     "> 1%",
@@ -79,10 +59,5 @@
     "Android >= 4.0",
     "iOS >= 8"
   ],
-  "transformModules": {
-    "cube-ui": {
-      "transform": "cube-ui/src/modules/${member}",
-      "kebabCase": true
-    }
-  }
+  "transformModules": {}
 }
