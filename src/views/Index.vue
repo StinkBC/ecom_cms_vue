@@ -1,54 +1,98 @@
 /* eslint-disable */
 <template>
   <el-container class="admin">
-    <el-header>
+  
+    <el-aside :style="'width:'+asideWidth">
+
+    <el-container class="admin_menu">
+       <el-header style="padding:0">
+         <el-row type="flex"  style="height:100%" align="center">
+           <el-col v-if="!isCollapsed" :span=24>
+            后台管理系统
+           </el-col>
+            <el-col v-else :span=24>
+            LOGO
+           </el-col>
+         </el-row>
+       </el-header>
+   
+        <el-menu
+          :default-active="$route.path"
+          width
+          :router="true"
+          :collapse="isCollapsed"
+          :default-openeds="openedMenus"
+         
+        >
+          <div @click="isCollapsed = !isCollapsed">
+            <i v-if="!isCollapsed" class="el-icon-s-fold"></i>
+            <i v-if="isCollapsed" class="el-icon-s-unfold"></i>
+          </div>
+          <component
+            v-for="(s1, si1) in menuStructures"
+            :is="s1.component"
+            :class="
+              s1.component === 'el-submenu'
+                ? 'admin_menu_sub'
+                : 'admin_menu_inline'
+            "
+            :key="si1"
+            :index="s1.index"
+          >
+            <template
+              v-if="s1.component === 'el-submenu'"
+              class="admin_menu_sub"
+              slot="title"
+            >
+              <i class="el-icon-location"></i>
+              <span slot="title">{{ s1.title }}</span>
+            </template>
+            <span v-else>{{ s1.title }}</span>
+
+            <component
+              v-for="(s2, si2) in s1.children"
+              :is="s2.component"
+              :class="
+                s2.component === 'el-submenu'
+                  ? 'admin_menu_sub'
+                  : 'admin_menu_inline'
+              "
+              :key="si2"
+              :index="s2.index"
+            >
+              <template
+                v-if="s2.component === 'el-submenu'"
+                class="admin_menu_sub"
+                slot="title"
+              >
+                <i class="el-icon-location"></i>
+                <span slot="title">{{ s2.title }}</span>
+              </template>
+              <span v-else>{{ s2.title }}</span>
+
+              <component
+                v-for="(s3, si3) in s2.children"
+                :is="s3.component"
+                :class="
+                  s3.component === 'el-submenu'
+                    ? 'admin_menu_sub'
+                    : 'admin_menu_inline'
+                "
+                :key="si3"
+                :index="s3.index"
+              >
+                <span>{{ s3.title }}</span>
+              </component>
+            </component>
+          </component>
+        </el-menu>
+
+    </el-container>
+      </el-aside>
+      <el-container>
+                  <el-header style="padding:0">
       <adminTop></adminTop>
     </el-header>
-    <el-container>
-      <el-aside>
-        <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-          <el-radio-button :label="false">展开</el-radio-button>
-          <el-radio-button :label="true">收起</el-radio-button>
-        </el-radio-group>
-        <el-menu
-          class="admin_menu"
-          default-active="1-4-1"
-          :collapse="isCollapse"
-        >
-          <el-submenu index="1">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span slot="title">导航一</span>
-            </template>
-            <el-menu-item-group>
-              <span slot="title">分组一</span>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-              <span slot="title">选项4</span>
-              <el-menu-item index="1-4-1">选项1</el-menu-item>
-            </el-submenu>
-          </el-submenu>
-          <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
-          </el-menu-item>
-        </el-menu>
-      </el-aside>
-
-      <el-container>
         <el-main>
           <transition
             v-if="$route.meta.keepAlive"
@@ -68,49 +112,221 @@
     </el-container>
   </el-container>
 </template>
-<style lang="scss" scoped>
+<style lang="scss">
 
-// 重写目录颜色，但是和主题进行隔离。
-
-$-menu-color-background: #1e1e1e ;
-$-menu-color-text: #fefefe ;
-$-menu-color-inline: mix($-menu-color-background, $-menu-color-text,10%);
+@import "@assets/style/mainstyle.scss";
 
 .admin {
-  background-color: #f8fafc;
+  background-color: $-color-background;
+     min-height: calc(100vh);
+
+  .el-menu{
+
+    height: 100%;
+   border:none;
+
+  }
+  .el-menu,.el-menu--popup,.el-menu--popup-right-start{
+  background-color: $-menu-color-background;
+    color: $-menu-color-text;
+  }
+     
 
   &_menu {
     background-color: $-menu-color-background;
-    color: $-menu-color-text ;
+    color: $-menu-color-text;
+    height: 100%;
 
-    .el-menu {
-      .el-submenu {
+    &_inline {
+      color: $-menu-color-text !important;
+      background-color: $-menu-color-background;
+    }
+
+    &_inline:hover,&_inline:focus {
+      color: $-menu-color-text !important;
+      background-color: $-menu-color-inline-hover;
+    }
+    
+
+    &_sub {
+      color: $-menu-color-text !important;
+
+      .el-submenu__title {
         color: $-menu-color-text !important;
       }
-      .el-menu--inline {
+      .el-submenu__title:hover,.el-submenu__title:focus {
         color: $-menu-color-text !important;
-        background-color: $-menu-color-inline;
+        background-color: $-menu-color-inline-hover;
       }
-      .is-active {
-        color: $-menu-color-text !important;
-      }
-      .is-opened {
-        color: $-menu-color-text !important;
-      }
+
+      &_inline {
+      color: $-menu-color-text !important;
+      background-color: $-menu-color-inline;
+    }
+    &_inline:hover,&_inline:focus {
+      color: $-menu-color-text !important;
+      background-color: $-menu-color-inline-hover;
+    }
+    }
+
+    
+    .el-menu-item:hover,.el-menu-item:focus, {
+      color: $-menu-color-text !important;
+      background-color: $-menu-color-inline-hover;
+    }
+    .is-active,.is-active:focus  {
+      color: $-menu-color-text !important;
+      background-color: $-color-primary;
+    }
+    .is-opened,.is-opened:focus {
+      background-color: $-menu-color-inline-opened;
     }
   }
 }
 </style>
 <script>
-import adminTop from '@/components/frame/admin_top'
+import adminTop from "@/components/frame/admin_top";
 
 export default {
-  data () {
+  data() {
     return {
-      isCollapse: false
+      isCollapsed: false,
+      openedMenus:[],
+      menuStructures: [
+        { component: "el-menu-item", title: "1", index: "1", children: [] },
+        {
+          component: "el-submenu",
+          title: "2",
+          index: "2",
+          children: [
+            {
+              component: "el-menu-item",
+              title: "2-1",
+              index: "2-1",
+              children: []
+            },
+            {
+              component: "el-menu-item",
+              title: "2-2",
+              index: "2-2",
+              children: []
+            }
+          ]
+        },
+        {
+          component: "el-submenu",
+          title: "3",
+          index: "3",
+          children: [
+            {
+              component: "el-submenu",
+              title: "3-1",
+              index: "3-1",
+              children: [
+                {
+                  component: "el-menu-item",
+                  title: "3-1-1",
+                  index: "3-1-1",
+                  children: []
+                },
+                {
+                  component: "el-menu-item",
+                  title: "3-1-2",
+                  index: "3-1-2",
+                  children: []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+  },
+  computed:{
+
+    asideWidth:function(){
+
+      if(this&&this.isCollapsed){
+         return '60px'
+      }else{
+        return '200px'
+      }
+    }
+
+  },
+  methods: {
+    reflashMenus() {
+      // 对目录树结构，需要做几个处理：
+      // 去除隐藏的页面
+      // 如果是多层结构，但是只有一个子页面，那么要提升页面等级
+      // 所以，需要以末端页面反向进行组装
+
+      let _this = this;
+      _this.menuStructures = [];
+
+      function addMenu(menuArr, router,line ) {
+        let menuItem = {
+          component: "el-menu-item",
+          title: router.name,
+          index: router.path
+        };
+
+        line.push(menuItem.index)
+        menuItem.line=[].concat(line)
+        // 设置默认展开
+
+if(menuItem.index===_this.$route.path){
+        _this.openedMenus=menuItem.line
+        }
+
+       
+        if (router.children && router.children.length > 0) {
+          // 如果有子节点，遍历
+          menuItem.children = [];
+          router.children.forEach(r => {
+            if (!r.hidden) {
+              addMenu(menuItem.children, r,[].concat(line));
+            }
+          });
+          // 子节点遍历结束后
+          if (
+            menuItem.children.length === 1 &&
+            menuItem.children[0].children &&
+            menuItem.children[0].children.length === 0
+          ) {
+            menuItem.title = menuItem.children[0].title;
+            menuItem.index = menuItem.children[0].index;
+            menuItem.children = [];
+          } else if (menuItem.children.length !== 0) {
+            menuItem.component = "el-submenu";
+          }
+        } else {
+          menuItem.children = [];
+        }
+
+        
+
+        if (menuItem.index === "/") {
+          menuItem.index = menuItem.title;
+        }
+
+        menuArr.push(menuItem);
+
+        return menuArr;
+      }
+
+      _this.$router.options.routes.forEach(r => {
+        if (!r.hidden) {
+          addMenu(_this.menuStructures, r,[]);
+        }
+      });
+
+      console.log(_this.openedMenus)
     }
   },
-  methods: {},
-  components: { adminTop }
-}
+  components: { adminTop },
+  mounted() {
+    this.reflashMenus();
+  }
+};
 </script>

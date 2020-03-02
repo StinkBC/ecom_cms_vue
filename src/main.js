@@ -6,6 +6,7 @@ import { createRouter } from '@router/router'
 import mystore from '@store/index.js'
 import ElementUI from 'element-ui'
 import '@assets/style/element-variables.scss'
+import '@assets/style/mainstyle.scss'
 
 import 'amfe-flexible'
 import FastClick from 'fastclick'
@@ -30,7 +31,7 @@ Vue.use(VueLazyload, {
 
 FastClick.attach(document.body) //  hack the active pseudo-classes failure caused by -webkit-overflow-scrolling touch
 
-export function createApp () {
+export function createApp() {
   const router = createRouter()
   // Vue.use(router)
   // const store = createStore()

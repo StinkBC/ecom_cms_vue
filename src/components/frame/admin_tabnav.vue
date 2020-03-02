@@ -8,6 +8,7 @@
 </template>
 
 <style lang="scss">
+@import "@assets/style/mainstyle.scss";
 .nav_a {
   width: 95%;
   margin-top: 25px;
@@ -17,8 +18,8 @@
     border: none;
 
     .is-active {
-      color: #000 !important;
-      background: #d2ecfc !important;
+      color: $-color-primary !important;
+      background: $-color-background !important;
       border-bottom: none !important;
       top: -4px !important;
     }
@@ -37,6 +38,7 @@
         border: #bcbcbc 1px solid;
         border-radius: 5px;
         margin-top: 4px;
+        margin-right: 5px;
       }
     }
   }

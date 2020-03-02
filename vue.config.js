@@ -7,7 +7,7 @@ const target = TARGET_NODE ? 'server' : 'client'
 const isDev = process.env.NODE_ENV !== 'production'
 
 const path = require('path')
-function resolve (dir) {
+function resolve(dir) {
   // 此处使用path.resolve 或path.join 可自行调整
   return path.join(__dirname, dir)
 }
@@ -17,15 +17,15 @@ module.exports = {
   // Vue CLI 会假设你的应用是被部署在一个域名的根路径上，例如 https://www.my-app.com/。
   // 如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。
   // 例如，如果你的应用被部署在 https://www.my-app.com/my-app/，则设置 publicPath 为 /my-app/。
-  publicPath:isDev ? '/':'/',
+  publicPath: isDev ? '/' : '/',
 
   devServer: {
-    port:8888,
+    port: 8889,
     historyApiFallback: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     proxy: {
       '/api': {
-        target: 'https://localhost:8888',
+        target: 'https://localhost:8889',
         changeOrigin: true,
         pathRewrite: {
           // '^/w': '/w'

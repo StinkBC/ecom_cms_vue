@@ -1,10 +1,6 @@
 <template>
+
 <el-container class="topbar">
-    <el-aside>
-        <span>后台管理系统</span>
-    </el-aside>
-<el-container>
-    <el-main>
       <div style="display:inline-block; width:75%">
         <TabNav ref="tab-nav"></TabNav>
       </div>
@@ -30,13 +26,20 @@
           </el-dropdown-menu>
         </el-dropdown>
       </div>
-    </el-main>
-</el-container>
 </el-container>
 
 </template>
 
-<style  lang="scss" scoped>
+<style  lang="scss" >
+
+@import "@assets/style/mainstyle.scss";
+
+.topbar{
+  height: 60px;
+  background-color: $-color-background ;
+    padding: 0;
+    border-bottom: 1px solid  $-color-border;
+}
 </style>
 <script>
 

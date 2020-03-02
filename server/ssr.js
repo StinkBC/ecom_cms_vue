@@ -15,7 +15,6 @@ app.use(koaMount('/dist', koaStatic(resolve('../dist'))))
 app.use(koaMount('/public', koaStatic(resolve('../public'))))
 
 const port = process.env.PORT || 3000
-console.log(process.env.PORT)
 
 app.listen(port, () => {
   console.log(`server started at localhost:${port}`)

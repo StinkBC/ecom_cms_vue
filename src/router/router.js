@@ -1,40 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@store/index'
+import defaultRouter from '@router/default'
+import rolesRouter from '@router/roleneed'
 
 Vue.use(Router)
 
 // 定义公共路由，其他路由需要从接口加载
-const commonRouter = [
-  {
-    path: '/',
-    component: () => import('@views/Index'),
-    children: [
-      {
-        path: '/dashboard',
-        name: 'dashboard',
-        meta: { keepAlive: false, needNavTag: false },
-        component: () => import('@views/Home.vue')
-      }
-    ]
-  },
-  {
-    path: '/adminLogin',
-    name: 'adminLogin',
-    meta: { keepAlive: false, needNavTag: false },
-    component: () => import('@views/Login.vue')
-  },
-  { path: '/403', component: () => import('@views/errors/403'), hidden: true },
-  { path: '/404', component: () => import('@views/errors/404'), hidden: true },
-  { path: '/error', component: () => import('@views/errors/error'), hidden: true }
 
-]
+// 定义需要鉴权的router
 
-export function createRouter () {
-  let router = new Router({
+export function createRouter() {
+  const router = new Router({
     mode: 'history',
     base: '/',
-    routes: commonRouter
+    routes: defaultRouter.concat(rolesRouter)
   })
 
   router.beforeEach((to, from, next) => {
