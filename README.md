@@ -1,13 +1,17 @@
+# 项目包含功能描述
+
+
+
 # 项目依赖说明
 ## UI框架
 
-交互实现使用了滴滴旗下的 Cube-ui,这个框架主要实现了交互，UI的CSS部分自己书写。
+交互实现使用了常见的VUE后台框架 ElementUI,图表使用了 AntV. 同时为了提高交互体验，禁用了双击交互。
 
-[Cube-ui官网](https://didi.github.io/cube-ui/#/zh-CN/docs/quick-start)
+[Element-UI官网](https://didi.github.io/cube-ui/#/zh-CN/docs/quick-start)
 
-## CSS语言
+## CSS处理
 
-Cube-ui框架使用的是 stylus，自己写的部分用的是 sass。
+自定义主题采用了变量设定的方式，文件路径是 /src/asset/style，其中 element-variables.scss 是element相关变量，mainstyle.scss是自定义界面的一些变量。
 
 ## 其他依赖项
 
@@ -29,9 +33,8 @@ Cube-ui框架使用的是 stylus，自己写的部分用的是 sass。
 - '@mockdatas' 等于 'mockdatas'
 
 ## 目录树
-```
-├── README.md    
-├── babel.config.js //babel配置，似乎没啥需要配置的    
+```  
+├── babel.config.js //babel配置   
 ├── mockdatas   //测试时期假数据       
 ├── package-lock.json    
 ├── package.json    
@@ -42,7 +45,8 @@ Cube-ui框架使用的是 stylus，自己写的部分用的是 sass。
 ├── scripts //启动脚本    
 │   ├── serve.js    
 │   └── start.js    
-├── server //SSR服务脚本文件    
+├── server //SSR服务脚本文件  
+│   ├── app //服务端代码（中间键）   
 │   ├── dev.ssr.js    
 │   ├── server.js    
 │   └── ssr.js    
@@ -50,7 +54,8 @@ Cube-ui框架使用的是 stylus，自己写的部分用的是 sass。
 │   ├── App.vue    
 │   ├── assets //项目静态资源    
 │   │   ├── images      
-│   │   └── style    
+│   │   └── style   
+│   │       ├── element-variables.scss //UI框架主题变量    
 │   │       └── mainstyle.scss //自己书写的通用样式    
 │   ├── components //模块    
 │   ├── views //页面    
@@ -59,9 +64,7 @@ Cube-ui框架使用的是 stylus，自己写的部分用的是 sass。
 │   ├── index.temp.html     
 │   ├── main.js //vue项目入口文件    
 │   ├── router //页面路由    
-│   ├── store //vuex的空间配置    
-│   ├── theme.styl //cube-ui主题文件，理论上不需要改    
-│   └── cube-ui.js //cube-ui主文件，理论上不需要改    
+│   └── store //vuex的空间配置    
 └── vue.config.js  //打包配置，包含了 webpackage的内容    
 ```
 
@@ -89,6 +92,7 @@ cnpm install
 ```
 npm run dev
 ```
+默认端口8889，如果被占用会自动+1
 
 ### 启动正式环境
 ```

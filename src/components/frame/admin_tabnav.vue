@@ -32,13 +32,13 @@
       .el-tabs__item {
         height: 40px;
         line-height: 32px;
-        background: #fefefe;
-        padding: 0 5px;
-        color: #5e5e5e;
-        border: #bcbcbc 1px solid;
+        background: $-color-background !important;
+        padding: 0 10px;
+        color: $-menu-color-inline-opened;
+        border: $-color-border 1px solid;
         border-radius: 5px;
         margin-top: 4px;
-        margin-right: 5px;
+        margin-right: 10px;
       }
     }
   }
