@@ -15,8 +15,8 @@ export default {
     return API.GET('/api/admin/logout', params)
   },
   // 获取权限目录
-  getRoles: params => {
-    return API.GET('/api/admin/rolesinfo', params)
+  getInfo: params => {
+    return API.GET('/api/admin/info', params)
   },
   // 修改个人信息
   changeProfile: params => {

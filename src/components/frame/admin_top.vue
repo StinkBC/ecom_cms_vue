@@ -8,7 +8,7 @@
         <el-dropdown trigger="click">
           <span class="el-dropdown-link userinfo-inner">
             <i class="iconfont icon-user"></i>
-            {{nickname}}
+            {{admin.nickname}}
             <i class="iconfont icon-down"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
@@ -46,6 +46,15 @@
 import TabNav from '@/components/frame/admin_tabnav'
 
 export default {
+  props:{
+    admin:{
+      type:Object,
+      default:function(){
+        return {nickname:''}
+      }
+    }
+
+  },
   data () {
     return {
 

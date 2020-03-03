@@ -91,7 +91,7 @@
       </el-aside>
       <el-container>
                   <el-header style="padding:0">
-      <adminTop></adminTop>
+      <adminTop :admin="adminInfo"></adminTop>
     </el-header>
         <el-main>
           <transition
@@ -186,12 +186,14 @@
 </style>
 <script>
 import adminTop from "@/components/frame/admin_top";
+import API from "@api/api_admin";
 
 export default {
   data() {
     return {
       isCollapsed: false,
       openedMenus:[],
+      adminInfo:{},
       menuStructures: [
         { component: "el-menu-item", title: "1", index: "1", children: [] },
         {
@@ -255,6 +257,37 @@ export default {
 
   },
   methods: {
+    getAdminInfo(){
+      let _this=this
+
+      API.getInfo()
+            .then(
+              function(result) {
+                 console.log(result)
+                if(result.code===1){
+                 
+                }
+              },
+              function(err) {
+                _this.loading = false;
+                _this.$message.error({
+                  showClose: true,
+                  message: err.toString(),
+                  duration: 2000
+                });
+              }
+            )
+            .catch(function(error) {
+              _this.loading = false;
+              console.log(error);
+              _this.$message.error({
+                showClose: true,
+                message: '请求出现异常',
+                duration: 2000
+              });
+            });
+
+    },
     reflashMenus() {
       // 对目录树结构，需要做几个处理：
       // 去除隐藏的页面
@@ -307,7 +340,7 @@ if(menuItem.index===_this.$route.path){
         
 
         if (menuItem.index === "/") {
-          menuItem.index = menuItem.title;
+          menuItem.index += menuItem.title;
         }
 
         menuArr.push(menuItem);
@@ -327,6 +360,8 @@ if(menuItem.index===_this.$route.path){
   components: { adminTop },
   mounted() {
     this.reflashMenus();
+
+    this.getAdminInfo();
   }
 };
 </script>

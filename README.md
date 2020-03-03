@@ -15,9 +15,11 @@
 
 ## 其他依赖项
 
-- postcss-px2rem：自动进行 px和rem转化
+- concurrently: 同时运行前端后和后端使用，在npm run dev时生效，用了-r参数关闭冗余的控制台输出
+- postcss-px2rem：自动进行 px和rem转化, 配合src下的rem.js处理自适应
 - fastclick：缩短固有的 点击需要等待 300ms才进行交互的机制
--  axios：前端XHR请求的支持库
+- axios：前端XHR请求的支持库
+- Winston :日志处理，入口文件在serve/lib/logger.js
 
 # 项目目录结构说明
 
@@ -34,8 +36,7 @@
 
 ## 目录树
 ```  
-├── babel.config.js //babel配置   
-├── mockdatas   //测试时期假数据       
+├── babel.config.js //babel配置        
 ├── package-lock.json    
 ├── package.json    
 ├── public  //静态文件夹，可以用 http(s)://host/子目录名 直接引用    
@@ -46,7 +47,8 @@
 │   ├── serve.js    
 │   └── start.js    
 ├── server //SSR服务脚本文件  
-│   ├── app //服务端代码（中间键）   
+│   ├── app //服务端代码（中间键）  
+│   │   ├── mockdatas   //测试时期 模拟数据数据   
 │   ├── dev.ssr.js    
 │   ├── server.js    
 │   └── ssr.js    

@@ -25,7 +25,7 @@ module.exports = {
     headers: { 'Access-Control-Allow-Origin': '*' },
     proxy: {
       '/api': {
-        target: 'https://localhost:8889',
+        target: 'http://localhost:3000',
         changeOrigin: true,
         pathRewrite: {
           // '^/w': '/w'
@@ -92,6 +92,7 @@ module.exports = {
       .set('@store', resolve('src/store'))
       .set('@common', resolve('src/components/common'))
       .set('@mockdatas', resolve('mockdatas'))
+      .set('@server', resolve('server'))
 
     config.module
       .rule('vue')

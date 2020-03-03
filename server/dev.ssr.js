@@ -5,6 +5,10 @@ const fs = require('fs')
 const path = require('path')
 const send = require('koa-send')
 const Router = require('koa-router')
+
+// 引入模拟数据
+const mockRouter = require('./app/mockdatas/index.js')
+
 // 1、webpack配置文件
 const webpackConfig = require('@vue/cli-service/webpack.config')
 const { createBundleRenderer } = require('vue-server-renderer')
@@ -37,7 +41,22 @@ const handleRequest = async ctx => {
     ctx.body = '等待webpack打包完成后在访问在访问'
     return
   }
+
   const url = ctx.path
+
+  process.accessLogger.access({ url: url })
+
+  // 如果 path是/api开头，使用mock数据
+  if (url.includes('api/')) {
+    await mockRouter(url, (body) => {
+      process.accessLogger.access(body)
+      ctx.body = body
+    })
+    process.accessLogger.access({ url: url, res: ctx.body })
+
+    return
+  }
+
   if (url.includes('favicon/logo-120.png')) {
     console.log(`proxy ${url}`)
     return await send(ctx, url, { root: path.resolve(__dirname, '../public') })
@@ -55,7 +74,7 @@ const handleRequest = async ctx => {
   const html = await renderToString(ctx, renderer)
   ctx.body = html
 }
-function renderToString (context, renderer) {
+function renderToString(context, renderer) {
   return new Promise((resolve, reject) => {
     renderer.renderToString(context, (err, html) => {
       err ? reject(err) : resolve(html)
@@ -66,5 +85,6 @@ function renderToString (context, renderer) {
 const router = new Router()
 
 router.get('*', handleRequest)
+router.post('*', handleRequest)
 
 module.exports = router
