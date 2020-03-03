@@ -93,7 +93,11 @@
                   <el-header style="padding:0">
       <adminTop :admin="adminInfo"></adminTop>
     </el-header>
+
+    <!-- 页面主体 -->
         <el-main>
+          <el-row justify="space-between">
+            <el-col :span="24" >
           <transition
             v-if="$route.meta.keepAlive"
             name="el-fade-in-linear"
@@ -106,7 +110,10 @@
           <transition v-else name="el-fade-in-linear" mode="out-in">
             <router-view></router-view>
           </transition>
+            </el-col>
+          </el-row>
         </el-main>
+
         <el-footer></el-footer>
       </el-container>
     </el-container>
@@ -129,6 +136,9 @@
   .el-menu,.el-menu--popup,.el-menu--popup-right-start{
   background-color: $-menu-color-background;
     color: $-menu-color-text;
+  }
+  .el-submenu,.el-submenu__title{
+    text-align: left;
   }
      
 

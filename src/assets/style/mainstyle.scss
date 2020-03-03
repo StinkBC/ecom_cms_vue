@@ -8,6 +8,7 @@ body{
 
 
 
+
 // 重写目录颜色，但是和主题进行隔离。
 $-color-primary: #503cb3;
 $-menu-color-background: #1e1e1e;
@@ -22,4 +23,6 @@ $-menu-color-inline-hover: mix($-menu-color-background, $-menu-color-text, 75%);
 
 $-color-background: #f8fafc;
 $-color-border: mix($-menu-color-background, $-menu-color-text, 10%);
+
+
 
