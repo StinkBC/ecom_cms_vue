@@ -1,15 +1,17 @@
 /* eslint-disable */
 <template>
   <el-row  justify="start" :gutter="5">
-    <el-col :span="24">
+    <el-col :span="24" class="form_card">
       <h1>本页面陈列大部分交互组件，用于方便调整主题</h1>
     </el-col>
-    <el-col :span="24">
+    <el-col :span="24" class="form_card">
       图标引用示例示意
       <Eicon name="#icon-earth"></Eicon>
     </el-col>
 
-    <el-col :span="24">
+
+
+    <el-col :span="24" class="form_card">
       <el-button>默认按钮</el-button>
       <el-button type="primary">主要按钮</el-button>
       <el-button type="success">成功按钮</el-button>
@@ -18,7 +20,7 @@
       <el-button type="danger">危险按钮</el-button>
     </el-col>
 
-    <el-col :span="24">
+    <el-col :span="24" class="form_card">
       <el-button plain>朴素按钮</el-button>
       <el-button type="primary" plain>主要按钮</el-button>
       <el-button type="success" plain>成功按钮</el-button>
@@ -27,7 +29,7 @@
       <el-button type="danger" plain>危险按钮</el-button>
     </el-col>
 
-    <el-col :span="24">
+    <el-col :span="24" class="form_card">
       <el-button round>圆角按钮</el-button>
       <el-button type="primary" round>主要按钮</el-button>
       <el-button type="success" round>成功按钮</el-button>
@@ -36,7 +38,7 @@
       <el-button type="danger" round>危险按钮</el-button>
     </el-col>
 
-    <el-col :span="24">
+    <el-col :span="24" class="form_card">
       <el-button icon="el-icon-search" circle></el-button>
       <el-button type="primary" icon="el-icon-edit" circle></el-button>
       <el-button type="success" icon="el-icon-check" circle></el-button>
@@ -45,7 +47,7 @@
       <el-button type="danger" icon="el-icon-delete" circle></el-button>
     </el-col>
 
-    <el-col :span="24">
+    <el-col :span="24" class="form_card">
       <el-input-number
         v-model="testvalue"
         :min="1"
@@ -61,7 +63,7 @@
       ></el-input-number>
     </el-col>
 
-    <el-col :span="24">
+    <el-col :span="24" class="form_card">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <span>卡片名称</span>
@@ -75,7 +77,7 @@
       </el-card>
     </el-col>
 
-    <el-col :span="24">
+    <el-col :span="24" class="form_card">
       <el-tag>标签一</el-tag>
       <el-tag type="success">标签二</el-tag>
       <el-tag type="info">标签三</el-tag>

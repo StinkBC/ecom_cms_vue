@@ -6,12 +6,12 @@ const Administrator = {
     name: ''
   },
   mutations: {
-    updateAdministrator (state, page) {
+    updateAdministrator(state, page) {
       state.pagesStack.push(page)
 
       return state.pagesStack
     },
-    changeStatus (state, page) {
+    changeStatus(state, page) {
       // 依次出栈到pagename
       if (page) {
         state.pagesStack.pop()
@@ -23,10 +23,10 @@ const Administrator = {
   },
   getters: {
     // 获取数据的方法
-    isLogin: function (state) {
+    isLogin: function(state) {
       return state.isLogin
     },
-    getInfo: function (state) {
+    getInfo: function(state) {
       if (state.isLogin) {
         return { name: state.name }
       } else {
@@ -35,10 +35,10 @@ const Administrator = {
     }
   },
   actions: {
-    signOut () {
+    signOut() {
 
     },
-    signIn () {
+    signIn() {
 
     }
 

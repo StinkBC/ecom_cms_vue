@@ -6,12 +6,11 @@
 
     <el-container class="admin_menu">
        <el-header style="padding:0">
-         <el-row type="flex"  style="height:100%" align="center">
-           <el-col v-if="!isCollapsed" :span=24>
-            后台管理系统
-           </el-col>
-            <el-col v-else :span=24>
-            LOGO
+         <el-row type="flex" class="top_logo"  align="center">
+           <el-col  class="top_logo_content"  :span=24>
+            <span v-if="!isCollapsed">后台管理系统</span>
+          
+            <span v-else >LOGO</span>
            </el-col>
          </el-row>
        </el-header>
@@ -126,6 +125,15 @@
 .admin {
   background-color: $-color-background;
      min-height: calc(100vh);
+    .top_logo{
+      height: 100%;
+      border-bottom:  $-menu-color-inline-hover 1px solid;
+      &_content{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
 
   .el-menu{
 

@@ -9,10 +9,12 @@ body{
 
 
 
+
 // 重写目录颜色，但是和主题进行隔离。
 $-color-primary: #503cb3;
 $-menu-color-background: #1e1e1e;
 $-menu-color-text: #fefefe;
+
 $-menu-color-inline: mix($-menu-color-background, $-menu-color-text, 90%);
 $-menu-color-inline-opened: mix(
   $-menu-color-background,
@@ -24,5 +26,16 @@ $-menu-color-inline-hover: mix($-menu-color-background, $-menu-color-text, 75%);
 $-color-background: #f8fafc;
 $-color-border: mix($-menu-color-background, $-menu-color-text, 10%);
 
+$-formcard-color-background: #fefefe;
 
 
+.form_card{
+  width: 100%;
+  border-radius: 2px;
+  background-color: $-formcard-color-background ;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: left;
+  margin-bottom: 10px;
+
+}
