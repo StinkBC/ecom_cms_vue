@@ -68,6 +68,12 @@ export default {
 
     }
   },
-  components: { TabNav }
+  components: { TabNav },
+   watch: {
+    $route(to, from) {
+      // 路由变化处理导航Tab
+      this.$refs['tab-nav'].addTab(to.name, to.fullPath);
+    }
+  }
 }
 </script>

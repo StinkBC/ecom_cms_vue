@@ -8,6 +8,7 @@
       element-loading-text="拼命加载中"
     >
       <el-col :span="24" class="" style="padding-bottom: 0px;">
+        <el-form :inline="true" :model="filters">
         <el-form-item>
           <el-input
             size="small"
@@ -24,7 +25,7 @@
             >{{ s.name }}</el-radio-button
           >
         </el-radio-group>
-        <el-form :inline="true" :model="filters">
+        
           <el-form-item>
             <el-button type="primary" v-on:click="handleSearch">查询</el-button>
           </el-form-item>
@@ -76,6 +77,7 @@ export default {
 
   data() {
     return {
+      loading:false,
       filters: {
         keywords: "",
         status: -1

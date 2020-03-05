@@ -55,6 +55,7 @@ export default {
     return {
       importExcel: false,
       allArr: [],
+      excelCol:[],
       currentArr:[],
       titleCols: [],
       pagination: {

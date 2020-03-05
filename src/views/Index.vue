@@ -23,7 +23,7 @@
           :default-openeds="openedMenus"
          
         >
-          <div @click="isCollapsed = !isCollapsed">
+          <div style="text-align:center"@click="isCollapsed = !isCollapsed">
             <i v-if="!isCollapsed" class="el-icon-s-fold"></i>
             <i v-if="isCollapsed" class="el-icon-s-unfold"></i>
           </div>
@@ -328,6 +328,7 @@ export default {
 
 if(menuItem.index===_this.$route.path){
         _this.openedMenus=menuItem.line
+        console.log( _this.openedMenus)
         }
 
        

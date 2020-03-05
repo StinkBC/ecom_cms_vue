@@ -66,6 +66,13 @@ export default [
         hidden: false,
         meta: { keepAlive: false },
         component: () => import('@views/sample/excel_sample.vue')
+      },
+      {
+        path: '/sample/sql',
+        name: 'sql工具',
+        hidden: false,
+        meta: { keepAlive: false },
+        component: () => import('@views/sample/sql.vue')
       }
     ]
   },
