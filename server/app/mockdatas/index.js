@@ -20,6 +20,11 @@ const route = function(path, callback) {
     const body = require('./db_excel')
     callback(body)
   }
+
+  if (path.includes('/htmlbulider/models')) {
+    const body = require('./html_models')
+    callback(body)
+  }
 }
 
 module.exports = route

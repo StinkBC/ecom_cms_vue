@@ -11,10 +11,14 @@ Vue.use(Router)
 // 定义需要鉴权的router
 
 export function createRouter() {
+  const routes = defaultRouter
+  routes.push(...rolesRouter)
+  console.log(routes)
+
   const router = new Router({
     mode: 'history',
     base: '/',
-    routes: defaultRouter.concat(rolesRouter)
+    routes: routes
   })
 
   router.beforeEach((to, from, next) => {
