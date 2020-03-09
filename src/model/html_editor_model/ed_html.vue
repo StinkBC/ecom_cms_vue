@@ -1,6 +1,8 @@
 <template>
   <div >
-    <vue-editor id="editor" useCustomImageHandler @image-added="handleImageAdded" v-model="htmlForEditor"> </vue-editor>
+    <vue-editor id="editor" 
+    useCustomImageHandler 
+    @image-added="handleImageAdded" @blur="changeHtml" v-model="htmlText"> </vue-editor>
   </div>
 </template>
 
@@ -9,17 +11,34 @@ import { VueEditor } from "vue2-editor";
 import API from "@api/api_upload";
 
 export default {
+    props:{
+      params:{
+        type:Object,
+            default:()=>{
+                return {html:""}
+            }
+
+      },
+    },
   components: {
     VueEditor
   },
+  computed:{
 
+
+  },
   data() {
     return {
-      htmlForEditor: ""
+      htmlText: ""
     };
   },
-
+  mounted(){
+        this.htmlText=this.params.html
+    },
   methods: {
+    changeHtml(){
+      this.$emit("changeParam",this.htmlText);
+    },
     handleImageAdded: function(file, Editor, cursorLocation, resetUploader) {
       // An example of using FormData
       // NOTE: Your key could be different such as:

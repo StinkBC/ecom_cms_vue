@@ -65,8 +65,8 @@
     </el-col>
 
     <el-col :span="8">
-      <el-tabs type="border-card">
-        <el-tab-pane label="页面配置" class="option">
+      <el-tabs type="border-card" v-model="currentOption">
+        <el-tab-pane label="页面配置" name="页面配置"  class="option">
           <el-col :span="24" class="option_item_row">
             <span class="option_item_label"> 页面标题</span>
             <el-input v-model="pageConfig.title"></el-input>
@@ -98,7 +98,7 @@
             </el-date-picker>
           </el-col>
         </el-tab-pane>
-        <el-tab-pane label="组件配置" class="option">
+        <el-tab-pane label="组件配置" name="组件配置" class="option">
           <!-- 通用配置项 -->
           <el-col
             :span="24"
@@ -112,6 +112,8 @@
               size="mini"
               class="option_editor"
               v-model="editor_params[k.key]"
+              :params="editor_params"
+              @changeParam="(e)=>{editor_params[k.key]=e}"
             >
             </component>
          
@@ -146,6 +148,8 @@
                   size="mini"
                   class="option_item_editor"
                   v-model="editor_items[index][k.key]"
+                  :params="editor_items[index]"
+                  @changeParam="(e)=>{editor_items[index][k.key]=e}"
                 >
                 </component>
               </el-col>
@@ -284,7 +288,8 @@ import API from "@api/api_htmlbulider";
 export default {
   data() {
     return {
-      pageConfig:{
+      currentOption:"页面配置",
+            pageConfig:{
         title:"营销页面",
         uri:"",
         bg_color:"#ffffff",
@@ -319,9 +324,18 @@ export default {
   },
   methods: {
     editorParams(m) {
+      if(this.editor.component){
+        // 同步数据
+        this.editor.params.items=this.editor_items
+        this.editor.params=this.editor_params
+      }
+
+
       this.editor = m.paramsConfig;
       this.editor_params = m.params;
       this.editor_items = m.params.items;
+
+      this.currentOption='组件配置'
 
       console.log(m)
     },
@@ -348,6 +362,8 @@ export default {
           type: "warning"
         });
       }
+       _this.editor.params.items=_this.editor_items
+
     },
     setComponent(type) {
       if (type === "Number") {

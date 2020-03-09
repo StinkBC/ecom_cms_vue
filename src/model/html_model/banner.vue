@@ -4,23 +4,24 @@
       <img :src="item.img"/>
     </el-carousel-item>
   </el-carousel> -->
-<div class="html_banner">
-  <mt-swipe :auto="4000">
-  <mt-swipe-item>1</mt-swipe-item>
-  <mt-swipe-item>2</mt-swipe-item>
-  <mt-swipe-item>3</mt-swipe-item>
+<div class="html_banner" :style="'height:'+params.height+'px'">
+  <mt-swipe :auto="params.auto" :speed="params.speed">
+  <mt-swipe-item v-for="(img,i) in params.items" :key="i">
+    <img :src="img.img" @click="goto(img.url)"/>
+  </mt-swipe-item>
 </mt-swipe>
 </div>
 
 </template>
 
-<style>
+<style lang="scss" scoped>
 
   
   .html_banner{
     background-color: #99a9bf;
     height:250px;
     width:100%;
+    img{width:100%}
   }
   
   
@@ -29,18 +30,25 @@
 <script>
 export default {
     props:{
-        images:{
-            type:Array,
+      params:{
+        type:Object,
             default:()=>{
-                return [{img:"/img/grep.png",target:""},{img:"/img/grep.png",target:""}]
+                return {}
             }
-        },
-        interval:{
-            type:Number,
-            default:()=>{
-                return 5000
-            }
-        }
+
+      },
+    },
+    deta(){
+      return{
+        images:[],
+        interval:5000,
+        speed:300,
+      }
+    },
+    methods:{
+      goto(url){
+        console.log(url)
+      }
     }
 }
 </script>

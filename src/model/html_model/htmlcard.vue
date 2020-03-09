@@ -1,21 +1,40 @@
 <template>
-  <el-card class="box-card">
-  <div v-for="o in 4" :key="o" class="text item">
-    {{'列表内容 ' + o }}
+  <el-card class="html-card ql-editor">
+  <div v-html="params.html">
+  
   </div>
 </el-card>
 </template>
 
-<style>
-  .text {
-    font-size: 14px;
-  }
+<style lang="scss">
 
-  .item {
-    padding: 18px 0;
-  }
+@import '~quill/dist/quill.snow.css';
 
-  .box-card {
-    width: 480px;
+
+  .html-card {
+    width:100%
   }
 </style>
+
+<script>
+export default {
+    props:{
+      params:{
+        type:Object,
+            default:()=>{
+                return {}
+            }
+
+      },
+    },
+    deta(){
+      return{
+      }
+    },
+    methods:{
+      goto(url){
+        console.log(url)
+      }
+    }
+}
+</script>
