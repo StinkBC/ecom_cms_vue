@@ -1,21 +1,29 @@
 <template>
-  <el-carousel :interval="interval" arrow="always">
+  <!-- <el-carousel :interval="interval" arrow="always">
     <el-carousel-item v-for="(item,i) in images" :key="i">
       <img :src="item.img"/>
     </el-carousel-item>
-  </el-carousel>
+  </el-carousel> -->
+<div class="html_banner">
+  <mt-swipe :auto="4000">
+  <mt-swipe-item>1</mt-swipe-item>
+  <mt-swipe-item>2</mt-swipe-item>
+  <mt-swipe-item>3</mt-swipe-item>
+</mt-swipe>
+</div>
+
 </template>
 
 <style>
 
   
-  .el-carousel__item:nth-child(2n) {
+  .html_banner{
     background-color: #99a9bf;
+    height:250px;
+    width:100%;
   }
   
-  .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
-  }
+  
 </style>
 
 <script>

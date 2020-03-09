@@ -105,7 +105,7 @@ module.exports = {
 
     // fix ssr hot update bug
     if (TARGET_NODE) {
-      config.plugins.delete('hmr')
+      // config.plugins.delete('hmr')
     }
   },
 

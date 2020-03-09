@@ -15,9 +15,9 @@ export default {
       }
     },
     params: {
-      type: Array,
+      type: Object,
       default() {
-        return [];
+        return {};
       }
     }
   },

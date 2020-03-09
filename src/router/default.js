@@ -85,6 +85,8 @@ export default [
   },
   { path: '/403', component: () => import('@views/errors/403'), hidden: true },
   { path: '/404', component: () => import('@views/errors/404'), hidden: true },
-  { path: '/error', component: () => import('@views/errors/error'), hidden: true }
+  { path: '/error', component: () => import('@views/errors/error'), hidden: true },
+  { path: '/activity/html/:id', component: () => import('@views/html_viewer/pre_view'), hidden: true },
+ 
 
 ]

@@ -8,6 +8,9 @@ import ElementUI from 'element-ui'
 import '@assets/style/element-variables.scss'
 import '@assets/style/mainstyle.scss'
 
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+
 import 'amfe-flexible'
 import FastClick from 'fastclick'
 
@@ -20,6 +23,8 @@ setRemInit()// 进行初始化立即运行
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
+
+Vue.use(MintUI)
 Vue.component('Eicon', Eicon)
 
 Vue.use(VueLazyload, {

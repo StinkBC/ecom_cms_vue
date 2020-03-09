@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
-  <el-row :gutter="20">
-    <el-col :span="8">
+  <el-row :gutter="10">
+    <el-col :span="6">
       <el-tabs type="border-card">
         <el-tab-pane label="常用组件">
           <ul class="models_list">
@@ -23,7 +23,7 @@
         <el-tab-pane label="其他组件">其他组件</el-tab-pane>
       </el-tabs>
     </el-col>
-    <el-col :span="8" class="dispaly_wrapper">
+    <el-col :span="6" class="dispaly_wrapper">
       <div
         class="pre_view"
         @drop="targetDrop($event, 'new')"
@@ -66,8 +66,98 @@
 
     <el-col :span="8">
       <el-tabs type="border-card">
-        <el-tab-pane label="组件配置">配置项 </el-tab-pane>
-        <el-tab-pane label="统计配置">统计配置</el-tab-pane>
+        <el-tab-pane label="页面配置" class="option">
+          <el-col :span="24" class="option_item_row">
+            <span class="option_item_label"> 页面标题</span>
+            <el-input v-model="pageConfig.title"></el-input>
+          </el-col>
+
+          <el-col :span="24" class="option_item_row">
+            <span class="option_item_label"> 页面URL后缀</span>
+            http://www.xxxx.com/activity/html/
+            <el-input v-model="pageConfig.uri"></el-input>
+          </el-col>
+
+          <el-col :span="24" class="option_item_row">
+            <span class="option_item_label"> 背景色</span>
+            <el-color-picker v-model="pageConfig.bg_color"></el-color-picker>
+          </el-col>
+
+          <el-col :span="24" class="option_item_row">
+            <span class="option_item_label"> 背景图</span>
+            <el-input v-model="pageConfig.bg_img"></el-input>
+          </el-col>
+
+          <el-col :span="24" class="option_item_row">
+            <span class="option_item_label"> 页面发布时间</span>
+            <el-date-picker
+              v-model="pageConfig.publish_time"
+              type="datetime"
+              placeholder="选择日期时间"
+            >
+            </el-date-picker>
+          </el-col>
+        </el-tab-pane>
+        <el-tab-pane label="组件配置" class="option">
+          <!-- 通用配置项 -->
+          <el-col
+            :span="24"
+            v-for="(k, i) in editor.common"
+            :key="i"
+            class="option_row"
+          >
+            <span class="option_label"> {{ k.name }}</span>
+            <component
+              :is="setComponent(k.type)"
+              size="mini"
+              class="option_editor"
+              v-model="editor_params[k.key]"
+            >
+            </component>
+         
+          </el-col>
+
+          <el-col :span="24">    <el-divider></el-divider></el-col>
+
+          <!-- 列表配置项 -->
+          <el-col
+            v-if="editor_items && editor_items.length > 0"
+            class="option_item"
+            :span="24"
+          >
+          
+            <span> 列表</span>
+            <el-col
+              :span="24"
+              v-for="(item, index) in editor_items"
+              class="option_item_card"
+              :key="index"
+            >
+              <span> [第{{ index + 1 }}项] </span>
+              <el-col
+                :span="24"
+                v-for="(k, i) in editor.item"
+                :key="i"
+                class="option_item_row"
+              >
+                <span class="option_item_label"> {{ k.name }}</span>
+                <component
+                  :is="setComponent(k.type)"
+                  size="mini"
+                  class="option_item_editor"
+                  v-model="editor_items[index][k.key]"
+                >
+                </component>
+              </el-col>
+            </el-col>
+            <el-col :span="24">
+              <el-button type="info" size="mini" @click="addEditorItem"
+                >+添加</el-button
+              >
+            </el-col>
+          </el-col>
+        </el-tab-pane>
+        
       </el-tabs>
     </el-col>
   </el-row>
@@ -75,6 +165,48 @@
 
 <style lang="scss" scoped>
 @import "@assets/style/mainstyle.scss";
+.option {
+  padding: 5px;
+  height: calc(100vh - 140px);
+  overflow-y: scroll;
+  font-size: 12px;
+
+  span {
+    font-size: 14px;
+  }
+
+  &_row {
+    margin-bottom: 5px;
+  }
+  &_label {
+    width: 20%;
+    text-align: right;
+    margin-right: 10px;
+    color: $-color-text-regular;
+    font-size: 12px;
+  }
+
+  &_item {
+    padding: 10px 15px;
+
+    &_card {
+      border-radius: 2px;
+      background: $-color-background_list;
+      margin-bottom: 10px;
+    }
+
+    &_label {
+      width: 15%;
+      text-align: right;
+      margin-right: 10px;
+      color: $-color-text-regular;
+      font-size: 12px;
+    }
+    &_row {
+      margin-bottom: 10px;
+    }
+  }
+}
 
 .models_list {
   display: flex;
@@ -82,6 +214,7 @@
   margin-top: 15px;
   flex: 5;
   justify-content: space-around;
+    font-size: 12px;
 
   &_item {
     width: 80px;
@@ -146,15 +279,19 @@
 
 <script>
 import TepLoader from "@/model/html_model/index";
-import API from "@api/api_htmlbulider"
+import API from "@api/api_htmlbulider";
 
 export default {
   data() {
     return {
-      components: [
-        // { component: "banner", params: [] },
-        // { component: "htmlcard", params: [] }
-      ],
+      pageConfig:{
+        title:"营销页面",
+        uri:"",
+        bg_color:"#ffffff",
+        bg_img:"",
+        publish_time:new Date()
+      },
+      components: [],
       currentDrag: null,
       draging: {
         status: false,
@@ -168,13 +305,83 @@ export default {
         leave: ""
       },
       editor: {},
+      editor_params: {},
+      editor_items: [],
       models: {}
     };
   },
-  components: { TepLoader },
+  components: {
+    TepLoader: TepLoader,
+    // 引入特定编辑组件
+    "ed-target": () => import("@/model/html_editor_model/ed_target.vue"),
+    "ed-image": () => import("@/model/html_editor_model/ed_image.vue"),
+    "ed-html": () => import("@/model/html_editor_model/ed_html.vue")
+  },
   methods: {
     editorParams(m) {
-      this.editor = m.params;
+      this.editor = m.paramsConfig;
+      this.editor_params = m.params;
+      this.editor_items = m.params.items;
+
+      console.log(m)
+    },
+    addEditorItem() {
+      let _this = this;
+
+      if (
+        _this.editor.itemLimit &&
+        _this.editor_items.length < _this.editor.itemLimit
+      ) {
+        let newItem = {};
+        this.editor.item.forEach(o => {
+          if (o.default) {
+            newItem[o.key] = o.default;
+          } else {
+            newItem[o.key] = _this.defaultValue(o.type);
+          }
+        });
+
+        _this.editor_items.push(newItem);
+      } else {
+        _this.$message({
+          message: "列表数目超出组件限制",
+          type: "warning"
+        });
+      }
+    },
+    setComponent(type) {
+      if (type === "Number") {
+        return "el-input-number";
+      } else if (type === "image") {
+        return "ed-image";
+      } else if (type ==="target") {
+        return "ed-target";
+      }  else if (type ==="html") {
+        return "ed-html";
+      }else {
+        return "div";
+      }
+    },
+    defaultValue(type) {
+      switch (type) {
+        case "Number":
+          return 0;
+          break;
+        case "String":
+          return "";
+          break;
+        case "image":
+          return "";
+          break;
+        case "target":
+          return "";
+          break;
+          case "html":
+          return "";
+          break;
+        default:
+          return null;
+      }
     },
     modelDrag(e, m) {
       console.log(e);
@@ -185,22 +392,68 @@ export default {
       this.draging.isNew = true;
     },
     targetDrop(e, m, index, ref) {
+      let _this = this;
       if (this.draging.status) {
         this.draging.status = false;
 
         if (this.draging.isNew) {
-          if (m === "new") {
-            this.components.push({
-              component: this.draging.component.name,
-              params: []
+          let newComponent = {
+            component: this.draging.component.name,
+            paramsConfig: this.draging.component.params,
+            params: {}
+          };
+
+          // 初始化默认值
+          newComponent.paramsConfig.common.forEach(o => {
+            if (o.default) {
+              newComponent.params[o.key] = o.default;
+            } else {
+              newComponent.params[o.key] = _this.defaultValue(o.type);
+            }
+          });
+
+          if (
+            newComponent.paramsConfig.item &&
+            newComponent.paramsConfig.item.length > 0
+          ) {
+            if (newComponent.paramsConfig.itemCount) {
+              newComponent.params.items = new Array(
+                newComponent.paramsConfig.itemCount
+              );
+            } else {
+              newComponent.params.items = new Array(1);
+            }
+
+            let newItem = {};
+            newComponent.paramsConfig.item.forEach(o => {
+              if (o.default) {
+                newItem[o.key] = o.default;
+              } else {
+                newItem[o.key] = _this.defaultValue(o.type);
+              }
             });
+
+            newComponent.params.items.fill(newItem);
+          }
+
+          if (m === "new") {
+            this.components.push(newComponent);
           } else {
             this.$refs[ref][0].style = "";
             m.newcomponent = null;
-            this.components.splice(index, 0, {
-              component: this.draging.component.name,
-              params: []
-            });
+            this.components.splice(index, 0, newComponent);
+          }
+
+          // 激活编辑
+          this.editorParams(newComponent);
+
+          // 处理样式
+
+          if (this.$refs[this.draging.enter]) {
+            this.$refs[this.draging.enter][0].style = "";
+          }
+          if (this.$refs[this.draging.leave]) {
+            this.$refs[this.draging.leave][0].style = "";
           }
         }
       }
@@ -209,7 +462,11 @@ export default {
       if (m === "new") {
       } else {
         this.draging.enter = ref;
-        this.$refs[this.draging.leave][0].style = "";
+
+        if (this.$refs[this.draging.leave]) {
+          this.$refs[this.draging.leave][0].style = "";
+        }
+
         this.$refs[this.draging.enter][0].style =
           "border-top:15px #503cb3 solid;";
 
@@ -223,16 +480,15 @@ export default {
         m.newcomponent = null;
       }
     },
-    deleteComponent(m,i){
-      console.log(i)
+    deleteComponent(m, i) {
+      console.log(i);
     }
   },
-  mounted(){
-    let _this=this
+  mounted() {
+    let _this = this;
     API.getModels().then(function(result) {
-        _this.models=result.data
-      });
-
+      _this.models = result.data;
+    });
   },
   computed: {}
 };
